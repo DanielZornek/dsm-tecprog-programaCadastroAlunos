@@ -57,38 +57,36 @@ public class JFrame2 extends JFrame {
 		JComboBox comboBox = new JComboBox<>(listaAlunos.toArray(new Aluno[0]));
 		comboBox.setBounds(28, 48, 332, 50);
 		contentPane.add(comboBox);
-
-		JLabel lbl_nome = new JLabel("New label");
+		
+		JLabel lbl_nome = new JLabel(listaAlunos.get(0).getNome());
 		lbl_nome.setFont(new Font("Dialog", Font.BOLD, 16));
 		lbl_nome.setBounds(494, 51, 194, 43);
 		contentPane.add(lbl_nome);
 
-		JLabel lbl_telefone = new JLabel("New label");
+		JLabel lbl_telefone = new JLabel(listaAlunos.get(0).getTelefone());
 		lbl_telefone.setFont(new Font("Dialog", Font.BOLD, 16));
 		lbl_telefone.setBounds(494, 119, 194, 43);
 		contentPane.add(lbl_telefone);
 
-		System.out.println(listaAlunos);
-
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(btnExcluir, "Deseja mesmo excluir?");
 				Aluno alunoSelecionado = (Aluno) comboBox.getSelectedItem();
+				int resposta = JOptionPane.showConfirmDialog(lbl_telefone, "Deseja mesmo excluir "+alunoSelecionado.getNome()+"?");
 
 				if (resposta == JOptionPane.YES_OPTION) {
 					if (listaAlunos.indexOf(alunoSelecionado) == -1) {
-						JOptionPane.showMessageDialog(btnExcluir, "Usuário já excluído anteriormente");
+						JOptionPane.showMessageDialog(lbl_telefone, "Usuário já excluído anteriormente");
 					} else {
 						listaAlunos.remove(listaAlunos.indexOf(alunoSelecionado));
-						JOptionPane.showMessageDialog(btnExcluir, "Usuário excluído");
+						JOptionPane.showMessageDialog(lbl_telefone, "Usuário excluído");
 						comboBox.removeItem(alunoSelecionado);
 					}
 
 				} else if (resposta == JOptionPane.NO_OPTION) {
-					JOptionPane.showMessageDialog(btnExcluir, "Ok, usuário ainda cadastrado");
+					JOptionPane.showMessageDialog(lbl_telefone, "Ok, usuário ainda cadastrado");
 				} else {
-					JOptionPane.showMessageDialog(btnExcluir, "Operação Cancelada");
+					JOptionPane.showMessageDialog(lbl_telefone, "Operação Cancelada");
 				}
 			}
 		});
@@ -130,11 +128,13 @@ public class JFrame2 extends JFrame {
 				}else {
 					int resposta = JOptionPane.showConfirmDialog(txt_muda_nome, "Deseja mesmo editar?");
 					if (resposta == JOptionPane.YES_OPTION) {
-						System.out.println(alunoSelecionado.getNome()+ " - " + alunoSelecionado.getTelefone());
+						comboBox.removeItem(alunoSelecionado);
 						alunoSelecionado.setNome(txt_muda_nome.getText());
 						alunoSelecionado.setTelefone(txt_muda_telefone.getText());
 						JOptionPane.showMessageDialog(txt_muda_nome,"Alteração realizada com sucesso");
-						System.out.println(alunoSelecionado.getNome()+ " - " + alunoSelecionado.getTelefone());
+						txt_muda_telefone.setText("");
+						txt_muda_nome.setText("");
+						comboBox.addItem(alunoSelecionado);
 					}else if(resposta == JOptionPane.NO_OPTION) {
 						JOptionPane.showMessageDialog(txt_muda_nome, "Dados não serão alterados");
 					}else {

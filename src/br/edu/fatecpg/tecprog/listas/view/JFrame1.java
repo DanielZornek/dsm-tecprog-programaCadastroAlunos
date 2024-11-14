@@ -24,9 +24,6 @@ public class JFrame1 extends JFrame {
 	private JTextField txt_telefone;
 	private static ArrayList<Aluno> listaAlunos = new ArrayList<>();
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,9 +37,6 @@ public class JFrame1 extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public JFrame1() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 480);
